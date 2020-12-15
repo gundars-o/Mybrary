@@ -1,13 +1,11 @@
 const mongoose = require( "mongoose" );
 const Book = require( "./book" );
-
 const authorSchema = new mongoose.Schema( {
     name: {
         type: String,
         required: true
     }
 } );
-
 /*Mongoose allows to do something before or after certain action occures.*/
 authorSchema.pre( "remove", function( next ) {
     Book.find( { author: this.id }, ( err, books ) => {
@@ -20,5 +18,4 @@ authorSchema.pre( "remove", function( next ) {
         };
     } );
 } );
-
 module.exports = mongoose.model( "Author"/*name of table in database*/, authorSchema );

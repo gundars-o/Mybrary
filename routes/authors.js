@@ -2,7 +2,6 @@ const express = require( "express" );
 const router = express.Router();
 const Author = require( "../models/author" );
 const Book = require( "../models/book" );
-
 // All Authors Route
 router.get( "/", async ( req, res ) => {
     let searchOptions ={};
@@ -19,12 +18,10 @@ router.get( "/", async ( req, res ) => {
         res.redirect( '/' );
     };
 } );
-
 // New Author Route
 router.get( "/new", ( req, res ) => {
     res.render( "authors/new", { author: new Author() } );
 } );
-
 // Create Author Route
 router.post( "/", async ( req,res ) => {/*npm i body-parser - no need for this?*/
     const author = new Author( { 
@@ -40,7 +37,6 @@ router.post( "/", async ( req,res ) => {/*npm i body-parser - no need for this?*
          } );
     };
 } );
-
 /*Show Author*/
 router.get( "/:id", async ( req, res ) => {
     try {
@@ -51,11 +47,10 @@ router.get( "/:id", async ( req, res ) => {
             booksByAuthor: books
         } );
     } catch/*( err )*/ {
-        /*console.log( err )*//*ReferenceError: Book is not defined at authors.js:47*/;
+        /*console.log( err )*//*ReferenceError: Book is not defined at authors.js:44*/;
         res.redirect( "/" );
     };
 } );
-
 router.get( "/:id/edit", async ( req, res ) => {
     try {
         const author = await Author.findById( req.params.id );
@@ -65,7 +60,6 @@ router.get( "/:id/edit", async ( req, res ) => {
     };
     res.render( "authors/edit", { author: new Author() } );
 } );
-
 router.put( "/:id", async ( req, res ) => {
     let author;
     try {
@@ -84,7 +78,6 @@ router.put( "/:id", async ( req, res ) => {
         };
     };
 } );
-
 router.delete( "/:id", async ( req, res ) => {
     let author;
     try {
@@ -101,5 +94,4 @@ router.delete( "/:id", async ( req, res ) => {
 } );
 /*npm i method-override*/
 /*From the browser you can make only GET or POST request. method-override library allows us to make PUT and DELETE.*/
-
 module.exports = router;
