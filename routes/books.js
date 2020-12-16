@@ -123,7 +123,7 @@ async function renderFormPage( res, book, form, /*errorMessage*/hasError = false
         if ( hasError ) {
             if ( form === "edit" ) {
                 params.errorMessage = "Error Updating Book";
-            } else if ( form === "edit ") {
+            } else if ( form === "new" ) {
                 params.errorMessage = "Error Creating Book";
             } else {
                 params.errorMessage = "Unknown Error";
